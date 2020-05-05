@@ -1,6 +1,5 @@
 .git
 .temp
-*.md
 ml/checkpoint/
 ml/models/
 tweets/
