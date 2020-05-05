@@ -91,7 +91,6 @@ DATABASE_URL = "sqlite:///./tweets.db"
 DATABASE_URL = f"postgresql://{DB_USERNAME}:{DB_PASSWORD}@postgresserver/{DB_NAME}"
 ```
 
-
 ```python
 # Connecting with Cloud SQL Postgres server
 DATABASE_URL = sqlalchemy.engine.url.URL(
@@ -105,6 +104,17 @@ DATABASE_URL = sqlalchemy.engine.url.URL(
 )
 ```
 
+To run the app locally, call
+
+```shell
+make run-local
+```
+
+To run the app with docker-compose (equipped with a postgres server), call
+
+```shell
+make docker-compose
+```
 
 ## Spinning up a Postgres server with Cloud SQL
 
