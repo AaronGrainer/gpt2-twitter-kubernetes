@@ -1,0 +1,10 @@
+.git
+.temp
+*.md
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+ml/
+models/
+tweets/

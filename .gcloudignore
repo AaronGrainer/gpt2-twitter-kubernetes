@@ -1,0 +1,6 @@
+.git
+.temp
+*.md
+ml/
+models/
+tweets/

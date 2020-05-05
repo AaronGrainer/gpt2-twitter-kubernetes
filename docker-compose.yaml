@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  gpt2-twitter-bot:
+    build: .
+    container_name: gpt2-twitter-bot
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+  postgresserver:
+    image: postgres:12.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+
+volumes:
+  postgres_data:
