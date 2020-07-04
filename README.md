@@ -1,5 +1,14 @@
 # GPT-2 Twitter Cloud Run
 
+<p align="center">
+  <a href="https://github.com/aarongrainer/gpt2-twitter-cloud-run/blob/master/LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/aarongrainer/gpt2-twitter-cloud-run?color=blue">
+  </a>
+  <a>
+    <img alt="Code Progress" src="https://img.shields.io/badge/Code-Completed-success">
+  </a>
+</p>
+
 A FastAPI app designed to run a [GPT-2](https://openai.com/blog/better-language-models/) powered twitter bot on a schedule using Google Cloud Run, Cloud Scheduler and Cloud SQL. 
 
 * The newest state-of-the-art GPT-2 language model from OpenAI is trained and fine-tuned on user tweets. 
