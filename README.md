@@ -1,11 +1,11 @@
 # GPT-2 Twitter Cloud Run
 
 <p align="center">
-  <a href="https://github.com/aarongrainer/gpt2-twitter-cloud-run/blob/master/LICENSE">
-    <img alt="GitHub" src="https://img.shields.io/github/license/aarongrainer/gpt2-twitter-cloud-run?color=blue">
-  </a>
   <a>
     <img alt="Code Progress" src="https://img.shields.io/badge/Code-Completed-success">
+  </a>
+  <a href="https://github.com/aarongrainer/gpt2-twitter-cloud-run/blob/master/LICENSE">
+    <img alt="GitHub" src="https://img.shields.io/github/license/aarongrainer/gpt2-twitter-cloud-run?color=blue">
   </a>
 </p>
 
