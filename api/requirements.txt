@@ -75,7 +75,7 @@ tqdm==4.45.0
 tweepy==3.8.0
 twint==2.1.20
 urllib3==1.25.8
-uvicorn==0.11.4
+uvicorn==0.11.7
 websockets==8.1
 Werkzeug==0.16.1
 win-inet-pton==1.1.0
