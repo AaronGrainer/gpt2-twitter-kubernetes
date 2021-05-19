@@ -74,7 +74,7 @@ soupsieve==2.0
 SQLAlchemy==1.3.16
 starlette==0.13.2
 tensorboard==2.1.0
-tensorflow==1.15.2
+tensorflow==2.4.0
 tensorflow-estimator==1.15.1
 termcolor==1.1.0
 toposort==1.5
