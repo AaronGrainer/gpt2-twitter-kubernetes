@@ -1,5 +1,5 @@
 fastapi==0.63.0
-pydantic==1.8.1
+pydantic==1.8.2
 starlette==0.13.6
 tweepy==3.10.0
 twint==2.1.20
