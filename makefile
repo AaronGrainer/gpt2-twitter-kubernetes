@@ -2,6 +2,9 @@ include .env
 export
 export MAKEFLAGS=--no-print-directory
 
+download-tweets:
+	python download_tweets.py --username=karpathy --limit=6000
+
 run-local:
 	uvicorn api.main:app --reload
 
