@@ -69,7 +69,7 @@ def download_tweets(username=None,
     
     print(f'Retrieving tweets for @{username}...')
 
-    with open(f'{username}_tweets.csv', 'w', encoding='utf-8', newline='') as f:
+    with open(f'data/{username}_tweets.csv', 'w', encoding='utf-8', newline='') as f:
         w = csv.writer(f)
         w.writerow(['tweets'])  # CSV Header
 
