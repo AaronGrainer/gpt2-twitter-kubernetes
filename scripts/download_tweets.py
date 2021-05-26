@@ -77,15 +77,12 @@ class TweetDownloader:
         return tweets
 
     def retrieve_tweets(self):
-        with open(f'data/{self.username}_tweets.csv', 'w', encoding='utf-8', newline='') as f:
-            w = csv.writer(f)
-            w.writerow(['tweets'])  # CSV Header
+        self._extract_tweets()
+        tweets = self._preprocess_tweets()
 
-            self._extract_tweets()
-            tweets = self._preprocess_tweets()
-            for tweet in tweets:
-                if tweet != '':
-                    w.writerow([tweet])
+        with open(f'data/{self.username}_tweets.txt', 'w', encoding="utf-8") as f:
+            f.write(' '.join(tweets))
+
 
 
 def download_tweets(username=None,
