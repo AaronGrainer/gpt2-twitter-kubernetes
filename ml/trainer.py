@@ -2,13 +2,11 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, TextDataset, DataC
 from transformers import TrainingArguments, Trainer
 
 import torch
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 
 from ml.config import global_config as gc
 
 import os
-import pickle
-import pandas as pd
 from typing import List
 import wandb
 
@@ -115,7 +113,7 @@ if __name__ == '__main__':
     dataset = 'data/karpathy_tweets.txt'
 
     gpt2_trainer = GPT2Trainer(model_checkpoint=model_checkpoint, dataset=dataset)
-    # gpt2_trainer.train_and_evaluate(run_name=run_name)
+    gpt2_trainer.train_and_evaluate(run_name=run_name)
     gpt2_trainer.save()
 
 
