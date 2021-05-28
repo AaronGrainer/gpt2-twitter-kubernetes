@@ -2,7 +2,6 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, TextDataset, DataC
 from transformers import TrainingArguments, Trainer
 
 import torch
-from torch.utils.data import DataLoader
 
 from ml.config import global_config as gc
 
@@ -24,7 +23,7 @@ class GPT2Trainer:
         self.model_checkpoint = model_checkpoint
         self.dataset = dataset
         self.checkpoint_path = gc.gpt2_checkpoint_path
-        self.model_path = os.path.join(gc.gpt2_checkpoint_path, gc.gpt2_model_torchscript_filename)
+        self.model_path = os.path.join(gc.gpt2_checkpoint_path, gc.gpt2_model_path)
 
         # self.lr = 2e-5
         self.batch_size = 16
@@ -53,10 +52,6 @@ class GPT2Trainer:
             self.model_checkpoint,
             torchscript=True
         )
-
-        dataloader = DataLoader(self.gpt2_dataset['train'], batch_size=1, shuffle=True)
-        batch_input = next(iter(dataloader))
-        self.trace_input = (batch_input.to(self.device))
         
     def train_and_evaluate(self, run_name: str = None):
         """Train and model and evaluate
@@ -102,9 +97,7 @@ class GPT2Trainer:
         if not os.path.exists(self.checkpoint_path):
             os.makedirs(self.checkpoint_path)
 
-        self.model.eval()
-        traced_model = torch.jit.trace(self.model, self.trace_input)
-        torch.jit.save(traced_model, self.model_path)
+        self.model.save_pretrained(self.model_path)
 
 
 if __name__ == '__main__':
