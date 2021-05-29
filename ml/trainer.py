@@ -27,7 +27,7 @@ class GPT2Trainer:
 
         # self.lr = 2e-5
         self.batch_size = 16
-        self.epochs = 3
+        self.epochs = 50
         self.weight_decay = 0.01
 
         self._load()
@@ -49,8 +49,7 @@ class GPT2Trainer:
         )
 
         self.model = AutoModelForCausalLM.from_pretrained(
-            self.model_checkpoint,
-            torchscript=True
+            self.model_checkpoint
         )
         
     def train_and_evaluate(self, run_name: str = None):
@@ -91,9 +90,9 @@ class GPT2Trainer:
         wandb.finish()
 
     def save(self):
-        """Save torchscipt model
+        """Save model
         """
-        print('Saving torchscript model')
+        print('Saving model')
         if not os.path.exists(self.checkpoint_path):
             os.makedirs(self.checkpoint_path)
 

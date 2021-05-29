@@ -72,7 +72,7 @@ class TweetDownloader:
             logger.info(f'{len(self.tweet_data)} of @{self.username} tweets downloaded.')
 
     def _preprocess_tweets(self):
-        tweets = [re.sub(self.pattern, '', tweet.full_text).strip()
+        tweets = ['<|startoftext|> ' + re.sub(self.pattern, '', tweet.full_text).strip() + ' <|endoftext|>'
                   for tweet in self.tweet_data]
         return tweets
 

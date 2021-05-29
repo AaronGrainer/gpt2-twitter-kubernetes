@@ -9,9 +9,13 @@ import os
 
 class GPT2Inferencer:
     def __init__(self):
+        self.username = 'karpathy'
+
         self.device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
         self.model_path = os.path.join(gc.gpt2_checkpoint_path, gc.gpt2_model_path)
+        self.tweet_predicted_path = gc.tweet_predicted_path
+        self.tweet_filename = os.path.join(gc.tweet_predicted_path, f'{self.username}__predicted_tweets.txt')
 
         self.model_checkpoint = 'gpt2'
         self.max_length = 100
@@ -31,13 +35,28 @@ class GPT2Inferencer:
         if not self.gpt2_model: 
             raise ModelNotTrained
 
-        sequence = 'He began his premiership by forming a five-man war cabinet which included Chamerlain as Lord President of the Council, Labour leader Clement Attlee as Lord Privy Seal (later as Deputy Prime Minister), Halifax as Foreign Secretary and Labour\'s Arthur Greenwood as a minister without portfolio. In practice,'
+        sequence = '<|startoftext|> '
         inputs = self.tokenizer.encode(sequence, return_tensors='pt')
 
-        outputs = self.gpt2_model.generate(inputs, max_length=200, do_sample=True)
-        text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
+        outputs = self.gpt2_model.generate(inputs,
+                                           do_sample=True,
+                                           max_length=200,
+                                           top_k=50, 
+                                           top_p=0.95, 
+                                           num_return_sequences=100)
+        tweets = [self.tokenizer.decode(output, skip_special_tokens=True) for output in outputs]
 
-        return text
+        return tweets
+
+    def save_tweets(self, tweets):
+        """Save predicted tweets
+        """
+        print('Saving predicted tweets')
+        if not os.path.exists(self.tweet_predicted_path):
+            os.makedirs(self.tweet_predicted_path)
+
+        with open(self.tweet_filename, 'w', encoding="utf-8") as f:
+            f.write('###############\n'.join(tweets))
 
 
 class ModelNotTrained(Exception):
@@ -46,7 +65,8 @@ class ModelNotTrained(Exception):
 
 if __name__ == '__main__':
     gpt2_inferencer = GPT2Inferencer()
-    text = gpt2_inferencer.predict()
-    print('text: ', text)
+    tweets = gpt2_inferencer.predict()
+    print('tweets: ', tweets)
+    gpt2_inferencer.save_tweets(tweets)
 
 
