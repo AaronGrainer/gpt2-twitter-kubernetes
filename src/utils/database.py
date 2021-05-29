@@ -13,21 +13,26 @@ def insert_tweets(tweets):
             'createdAt': datetime.now(),
             'updatedAt': datetime.now(),
             'text': tweet,
-            'tweeted': False
+            'tweet_timestamp': None,
+            'tweet_url': None
         })
     twitter_client['tweets'].insert_many(tweet_doc)
 
 
-def get_new_tweet():
+def get_tweet():
     tweet = twitter_client['tweets'].find_one({
-        'tweeted': False
-    })
-    if tweet:
-        twitter_client['tweets'].update_one({
-            '_id': tweet['_id']
-        }, {
-            'tweeted': True
-        })
-        
+        'tweet_timestamp': None
+    })        
     return tweet
+
+
+def update_tweet(tweet, tweet_url):
+    twitter_client['tweets'].update_one({
+        '_id': tweet['_id']
+    }, {
+        '$set': {
+            'tweet_timestamp': datetime.now(),
+            'tweet_url': tweet_url
+        }
+    })
 

@@ -110,9 +110,9 @@ async def tweet_currated():
 
 	if tweet is None:
 		raise HTTPException(
-		status_code=404,
-		detail="No more tweets left",
-		headers={"X-Error": "Error away"}
+			status_code=404,
+			detail="No more tweets left",
+			headers={"X-Error": "Error away"}
 		)
 
 	auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
