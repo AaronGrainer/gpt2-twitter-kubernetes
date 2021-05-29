@@ -20,6 +20,8 @@ class GPT2Inferencer:
         self.model_checkpoint = 'gpt2'
         self.max_length = 100
 
+        self.start_sequence = '<|startoftext|> '
+
         self._initialize()
 
     def _initialize(self):
@@ -35,8 +37,7 @@ class GPT2Inferencer:
         if not self.gpt2_model: 
             raise ModelNotTrained
 
-        sequence = '<|startoftext|> '
-        inputs = self.tokenizer.encode(sequence, return_tensors='pt')
+        inputs = self.tokenizer.encode(self.start_sequence, return_tensors='pt')
 
         outputs = self.gpt2_model.generate(inputs,
                                            do_sample=True,
@@ -56,7 +57,8 @@ class GPT2Inferencer:
             os.makedirs(self.tweet_predicted_path)
 
         with open(self.tweet_filename, 'w', encoding="utf-8") as f:
-            f.write('###############\n'.join(tweets))
+            tweets = [tweet.replace(self.start_sequence, '').strip().capitalize() for tweet in tweets]
+            f.write('\n###############\n'.join(tweets))
 
 
 class ModelNotTrained(Exception):

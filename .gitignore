@@ -132,6 +132,7 @@ dmypy.json
 .env
 ml/checkpoint/
 ml/models/
+ml/output/
 data/
 runs/
 wandb/
