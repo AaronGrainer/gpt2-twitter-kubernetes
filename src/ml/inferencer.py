@@ -15,7 +15,7 @@ class GPT2Inferencer:
 
         self.model_path = os.path.join(gc.gpt2_checkpoint_path, gc.gpt2_model_path)
         self.tweet_predicted_path = gc.tweet_predicted_path
-        self.tweet_filename = os.path.join(gc.tweet_predicted_path, f'{self.username}__predicted_tweets.txt')
+        self.tweet_filename = os.path.join(gc.tweet_predicted_path, f'{self.username}_predicted_tweets.txt')
 
         self.model_checkpoint = 'gpt2'
         self.max_length = 100

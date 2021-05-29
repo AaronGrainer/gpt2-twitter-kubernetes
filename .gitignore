@@ -130,9 +130,9 @@ dmypy.json
 
 # Extra files
 .env
-ml/checkpoint/
-ml/models/
-ml/output/
+src/ml/checkpoint/
+src/ml/models/
+src/ml/output/
 data/
 runs/
 wandb/

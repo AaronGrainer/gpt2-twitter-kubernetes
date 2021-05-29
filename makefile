@@ -3,13 +3,13 @@ export
 export MAKEFLAGS=--no-print-directory
 
 download-tweets:
-	python -m scripts.download_tweets --username=karpathy
+	python -m src.scripts.download_tweets --username=karpathy
 
 run-local:
 	uvicorn api.main:app --reload
 
 docker-compose:
-	docker-compose up --build
+	docker-compose up --build -d
 
 create-postgres-instance:
 	gcloud sql instances create ${DB_INSTANCE} \
@@ -47,3 +47,13 @@ add-scheduler:
 		--http-method=POST \
 		--time-zone=Asia/Kuala_Lumpur \
 		--max-retry-attempts=5
+
+
+k8-init:
+	kubectl create namespace gpt2-twitter
+
+k8-deploy-mongo:
+	kubectl apply -f kubernetes/mongodb-kubernetes-operator.yaml
+
+	kubectl create secret generic my-mongodb-user-password -n gpt2-twitter --from-literal="password=TXs3ZsuIqT-pQFvwxOec"
+
