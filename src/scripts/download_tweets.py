@@ -1,6 +1,5 @@
 import os
 import fire
-import csv
 import tweepy
 import re
 

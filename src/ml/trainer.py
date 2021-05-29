@@ -3,7 +3,7 @@ from transformers import TrainingArguments, Trainer
 
 import torch
 
-from ml.config import global_config as gc
+from src.config import global_config as gc
 
 import os
 from typing import List
