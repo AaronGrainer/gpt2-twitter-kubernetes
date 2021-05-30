@@ -72,5 +72,13 @@ k8-deploy-mongo:
 		--from-literal="projectName=<myOpsManagerProjectName>" \
 		--from-literal="orgId=<orgID>"
 
-	
+docker-build:
+	docker image build -f "docker/Dockerfile.tweet" . \
+		--no-cache \
+		-t "gpt2-twitter:latest"
+
+docker-push:
+	docker login
+	docker image tag gpt2-twitter:latest aarongrainer/gpt2-twitter:latest
+	docker push aarongrainer/gpt2-twitter:latest
 

@@ -24,6 +24,11 @@ services:
     #         - 8000:8000
     #     env_file:
     #         - .env
+    tweet-script:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile.tweet
+        container_name: post-twitter-script
     
 
 # volumes:
