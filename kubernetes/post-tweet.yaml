@@ -9,4 +9,5 @@ spec:
       containers:
       - name: gpt2-post-tweet
         image: aarongrainer/gpt2-post-tweet
+        command: ["python", "-m", "src.scripts.post_tweets"]
       restartPolicy: OnFailure

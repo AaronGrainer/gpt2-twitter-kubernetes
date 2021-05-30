@@ -8,5 +8,3 @@ RUN apt-get update \
 COPY ./src/scripts /src/scripts
 COPY ./src/utils /src/utils
 COPY ./src/config.py /src/config.py
-
-CMD ["python", "-m", "src.scripts.post_tweets"]

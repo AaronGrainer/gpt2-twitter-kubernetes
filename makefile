@@ -49,31 +49,13 @@ add-scheduler:
 		--max-retry-attempts=5
 
 
+
 k8-init:
 	kubectl create namespace gpt2-twitter
 	kubectl config set-context minikube --namespace=gpt2-twitter
 
 k8-deploy-mongo:
-	kubectl apply -f kubernetes/mongodb-kubernetes-operator.yaml
-
-	kubectl create secret generic my-mongodb-user-password -n gpt2-twitter --from-literal="password=TXs3ZsuIqT-pQFvwxOec"
-
-
-	kubectl apply -f https://raw.githubusercontent.com/mongodb/mongodb-enterprise-kubernetes/master/crds.yaml
-	kubectl apply -f kubernetes/mongodb-enterprise.yaml
-
-	kubectl -n gpt2-twitter \
-		create secret generic gpt2-twitter-mongo-cred \
-		--from-literal="user=${MONGODB_PUBLIC_KEY}" \
-		--from-literal="publicApiKey=${MONGODB_PRIVATE_KEY}"
-
-	kubectl create configmap gpt2-twitter-mongo-configmap \
-		--from-literal="baseUrl=<myOpsManagerURL>" \
-		--from-literal="projectName=<myOpsManagerProjectName>" \
-		--from-literal="orgId=<orgID>"
-
-minikube-registry:
-	minikube addons enable registry
+	kubectl apply -f kubernetes/mongo-deployment.yaml
 
 docker-build:
 	docker image build -f "docker/Dockerfile.tweet" .
