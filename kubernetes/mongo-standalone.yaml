@@ -1,0 +1,16 @@
+---
+apiVersion: mongodb.com/v1
+kind: MongoDB
+metadata:
+  name: mongodb
+  namespace: gpt2-twitter
+spec:
+  version: "4.2.2-ent"
+  opsManager:
+    configMapRef:
+      name: <configMap.metadata.name>
+            # Must match metadata.name in ConfigMap file
+  credentials: <mycredentials>
+  type: Standalone
+  persistent: true
+...
