@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gpt2-post-tweet
+  namespace: gpt2-twitter
+spec:
+  template:
+    spec:
+      containers:
+      - name: gpt2-post-tweet
+        image: aarongrainer/gpt2-post-tweet
+      restartPolicy: OnFailure

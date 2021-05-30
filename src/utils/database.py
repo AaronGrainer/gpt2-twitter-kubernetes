@@ -2,7 +2,7 @@ import pymongo
 from datetime import datetime
 
 
-client = pymongo.MongoClient('localhost', 4321)
+client = pymongo.MongoClient('mongo', 27017)
 twitter_client = client['twitter']
 
 

@@ -72,13 +72,18 @@ k8-deploy-mongo:
 		--from-literal="projectName=<myOpsManagerProjectName>" \
 		--from-literal="orgId=<orgID>"
 
+minikube-registry:
+	minikube addons enable registry
+
 docker-build:
-	docker image build -f "docker/Dockerfile.tweet" . \
-		--no-cache \
-		-t "gpt2-twitter:latest"
+	docker image build -f "docker/Dockerfile.tweet" .
 
 docker-push:
 	docker login
 	docker image tag gpt2-twitter:latest aarongrainer/gpt2-twitter:latest
 	docker push aarongrainer/gpt2-twitter:latest
+
+update-job: docker-build docker-push
+	kubectl delete -f kubernetes/post-tweet.yaml
+	kubectl apply -f kubernetes/post-tweet.yaml
 
