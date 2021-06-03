@@ -31,11 +31,13 @@ class PostTweets:
             t = self.api.update_status(tweet['text'])
             tweet_url = f'https://twitter.com/{t.user.screen_name}/status/{t.id_str}'
             
-            update_tweet(tweet, tweet_url)
+            tweet = update_tweet(tweet, tweet_url)
 
             logger.info(f'New tweet posted @ {tweet_url}')
         else:
             logger.info(f'No more tweets to post')
+
+        return tweet
 
 
 if __name__ == '__main__':

@@ -1,12 +1,17 @@
 import pymongo
 from datetime import datetime
 
+from typing import List
+
 
 client = pymongo.MongoClient('mongo', 27017)
 twitter_client = client['twitter']
 
 
 def insert_tweets(tweets):
+    if not isinstance(tweets, List):
+        tweets = [tweets]
+
     tweet_doc = list()
     for tweet in tweets:
         tweet_doc.append({
@@ -27,12 +32,14 @@ def get_tweet():
 
 
 def update_tweet(tweet, tweet_url):
-    twitter_client['tweets'].update_one({
+    tweet = twitter_client['tweets'].find_one_and_update({
         '_id': tweet['_id']
     }, {
         '$set': {
             'tweet_timestamp': datetime.now(),
             'tweet_url': tweet_url
         }
-    })
+    },
+    return_document=pymongo.ReturnDocument.AFTER)
+    return tweet
 

@@ -8,3 +8,4 @@ wandb==0.10.28
 python-dotenv==0.17.0
 transformers==4.5.1
 pymongo==3.10.1
+python-multipart==0.0.5
