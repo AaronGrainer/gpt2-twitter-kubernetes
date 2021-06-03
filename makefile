@@ -49,14 +49,30 @@ add-scheduler:
 		--max-retry-attempts=5
 
 
-
+# Minikube
 k8-init:
 	kubectl create namespace gpt2-twitter
 	kubectl config set-context minikube --namespace=gpt2-twitter
+	minikube dashboard
 
 k8-deploy-mongo:
-	kubectl apply -f kubernetes/mongo-deployment.yaml
+	kubectl apply -f kubernetes/mongo-volume.yaml
+	kubectl apply -f kubernetes/mongo.yaml
 
+k8-port-forward-mongo:
+	kubectl port-forward svc/mongo 4321:27017
+
+skaffold-dev:
+	skaffold dev
+
+skaffold-delete:
+	skaffold delete
+
+minikube-view-service:
+	minikube service gpt2-tweet-app-service -n gpt2-twitter
+
+
+# Docker
 docker-build:
 	docker image build -f "docker/Dockerfile.tweet" .
 

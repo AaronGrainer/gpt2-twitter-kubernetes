@@ -1,10 +1,10 @@
 apiVersion: skaffold/v2beta16
 kind: Config
 metadata:
-  name: gpt--twitter
+  name: gpt2-twitter
 build:
   artifacts:
-  - image: aarongrainer/gpt2-tweet-app
+  - image: docker.io/aarongrainer/gpt2-tweet-app
     docker:
       dockerfile: Dockerfile.app
 deploy:

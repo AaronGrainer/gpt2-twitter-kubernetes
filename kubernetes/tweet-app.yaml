@@ -31,8 +31,7 @@ spec:
     spec:
       containers:
         - name: gpt2-tweet-app
-          image: aarongrainer/gpt2-tweet-app
+          image: docker.io/aarongrainer/gpt2-tweet-app:latest
           command: ["uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "8000"]
           ports:
             - containerPort: 8080
-          imagePullPolicy: Always
