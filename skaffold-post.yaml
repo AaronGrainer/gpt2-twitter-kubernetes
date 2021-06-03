@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: gpt2-twitter
+build:
+  artifacts:
+  - image: docker.io/aarongrainer/gpt2-post-tweet
+    docker:
+      dockerfile: Dockerfile.tweet
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes/post-tweet.yaml
