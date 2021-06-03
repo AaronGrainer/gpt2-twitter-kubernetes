@@ -1,32 +1,19 @@
-from typing import List, Optional
+from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Depends, File, UploadFile, Header
 from pydantic import BaseModel
-from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY
 
-from src.utils.database import get_tweet, insert_tweets
+from src.utils.database import insert_tweets
 from src.scripts.post_tweets import PostTweets
 
 import os
-import time
 from datetime import datetime
 from dotenv import load_dotenv
-import tweepy
 
 
 load_dotenv()
 
-# Twitter environment variables
-CONSUMER_KEY = os.environ.get("CONSUMER_KEY")
-CONSUMER_SECRET = os.environ.get('CONSUMER_SECRET')
-ACCESS_KEY = os.environ.get("ACCESS_KEY")
-ACCESS_SECRET = os.environ.get("ACCESS_SECRET")
 
-
-assert all([CONSUMER_KEY, CONSUMER_SECRET, ACCESS_KEY, ACCESS_SECRET]
-           ), "Not all Twitter environment variables have been specified in .env file"
-
-# Optional: Secret header token
 SECRET_TOKEN = os.environ.get("SECRET_TOKEN")
 
 
