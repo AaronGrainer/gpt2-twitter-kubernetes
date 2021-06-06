@@ -6,6 +6,7 @@ import torch
 from src.config import global_config as gc
 
 import os
+import fire
 from typing import List
 import wandb
 
@@ -99,13 +100,16 @@ class GPT2Trainer:
         self.model.save_pretrained(self.model_path)
 
 
-if __name__ == '__main__':
+def main(dataset='data/karpathy_tweets.txt'):
     run_name = 'gpt2-twitter'
     model_checkpoint = 'gpt2'
-    dataset = 'data/karpathy_tweets.txt'
 
     gpt2_trainer = GPT2Trainer(model_checkpoint=model_checkpoint, dataset=dataset)
     gpt2_trainer.train_and_evaluate(run_name=run_name)
     gpt2_trainer.save()
+
+
+if __name__ == '__main__':
+    fire.Fire(main)
 
 
